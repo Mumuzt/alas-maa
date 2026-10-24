@@ -26,6 +26,9 @@
     "action": "DoNothing",
     "next": [
       "AlasSignInOpen"
+    ],
+    "on_error": [
+      "AlasSignInBack"
     ]
   },
   "AlasSignInOpen": {
@@ -133,6 +136,9 @@
     "action": "DoNothing",
     "next": [
       "AlasCommissionOpen"
+    ],
+    "on_error": [
+      "AlasCommissionBack"
     ]
   },
   "AlasCommissionOpen": {
@@ -240,6 +246,9 @@
     "action": "DoNothing",
     "next": [
       "AlasResearchOpen"
+    ],
+    "on_error": [
+      "AlasResearchBack"
     ]
   },
   "AlasResearchOpen": {
@@ -325,6 +334,9 @@
     "action": "DoNothing",
     "next": [
       "AlasDormOpen"
+    ],
+    "on_error": [
+      "AlasDormBack"
     ]
   },
   "AlasDormOpen": {
@@ -410,6 +422,9 @@
     "action": "DoNothing",
     "next": [
       "AlasShopOpen"
+    ],
+    "on_error": [
+      "AlasShopBack"
     ]
   },
   "AlasShopOpen": {
@@ -475,6 +490,76 @@
     "timeout": 30000,
     "next": [
       "AlasSignInWaitMain"
+    ]
+  },
+  "AlasSignInBack": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 900,
+    "max_hit": 3,
+    "next": [
+      "AlasSignInWaitMain"
+    ]
+  },
+  "AlasCommissionBack": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 900,
+    "max_hit": 3,
+    "next": [
+      "AlasCommissionWaitMain"
+    ]
+  },
+  "AlasResearchBack": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 900,
+    "max_hit": 3,
+    "next": [
+      "AlasResearchWaitMain"
+    ]
+  },
+  "AlasDormBack": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 900,
+    "max_hit": 3,
+    "next": [
+      "AlasDormWaitMain"
+    ]
+  },
+  "AlasShopBack": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 900,
+    "max_hit": 3,
+    "next": [
+      "AlasShopWaitMain"
     ]
   }
 }
