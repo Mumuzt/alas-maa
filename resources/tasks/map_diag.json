@@ -1,0 +1,25 @@
+{
+  "task": [
+    {
+      "name": "资源加载检查",
+      "label": "资源加载检查",
+      "entry": "AlasResourceLoaded",
+      "group": ["diagnostic"],
+      "description": "不依赖游戏画面，用于确认 Alas Maa 的 Project Interface、任务和 Pipeline 已被宿主加载。"
+    },
+    {
+      "name": "地图动作计划入口",
+      "label": "地图动作计划入口",
+      "entry": "AlasMapAction",
+      "group": ["diagnostic"],
+      "description": "动作计划回放入口。宿主通过 Pipeline override 注入固定坐标 Click 节点。"
+    },
+    {
+      "name": "地图识别回放",
+      "label": "地图识别回放",
+      "entry": "AlasMapRecognition",
+      "group": ["diagnostic"],
+      "description": "通过 Custom Recognition 回调回放固定地图识别结果，验证 out_box/out_detail 桥接。"
+    }
+  ]
+}

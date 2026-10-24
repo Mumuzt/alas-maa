@@ -1,0 +1,480 @@
+{
+  "AlasSignIn_Task": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 30000,
+    "next": [
+      "AlasSignInWaitMain"
+    ]
+  },
+  "AlasSignInWaitMain": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "出击"
+        ],
+        "roi": [
+          0,
+          360,
+          1280,
+          360
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": "DoNothing",
+    "next": [
+      "AlasSignInOpen"
+    ]
+  },
+  "AlasSignInOpen": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "任务"
+        ],
+        "threshold": 0.35,
+        "order_by": "Expected"
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 1200,
+    "next": [
+      "AlasSignInPanel"
+    ]
+  },
+  "AlasSignInPanel": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "每日"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 800,
+    "next": [
+      "AlasSignInClaim"
+    ]
+  },
+  "AlasSignInClaim": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "领取"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 900,
+    "next": [
+      "AlasSignInClaim",
+      "AlasSignInClose"
+    ]
+  },
+  "AlasSignInClose": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 800,
+    "next": [
+      "AlasMainScreen"
+    ]
+  },
+  "AlasCommission_Task": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 30000,
+    "next": [
+      "AlasCommissionWaitMain"
+    ]
+  },
+  "AlasCommissionWaitMain": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "出击"
+        ],
+        "roi": [
+          0,
+          360,
+          1280,
+          360
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": "DoNothing",
+    "next": [
+      "AlasCommissionOpen"
+    ]
+  },
+  "AlasCommissionOpen": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "任务"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 1200,
+    "next": [
+      "AlasCommissionTab"
+    ]
+  },
+  "AlasCommissionTab": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "委托"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 900,
+    "next": [
+      "AlasCommissionClaim"
+    ]
+  },
+  "AlasCommissionClaim": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "一键领取",
+          "全部领取"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 900,
+    "next": [
+      "AlasCommissionClaim",
+      "AlasCommissionClose"
+    ]
+  },
+  "AlasCommissionClose": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 800,
+    "next": [
+      "AlasMainScreen"
+    ]
+  },
+  "AlasResearch_Task": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 30000,
+    "next": [
+      "AlasResearchWaitMain"
+    ]
+  },
+  "AlasResearchWaitMain": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "出击"
+        ],
+        "roi": [
+          0,
+          360,
+          1280,
+          360
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": "DoNothing",
+    "next": [
+      "AlasResearchOpen"
+    ]
+  },
+  "AlasResearchOpen": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "科研"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 1500,
+    "next": [
+      "AlasResearchClaim"
+    ]
+  },
+  "AlasResearchClaim": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "领取"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 900,
+    "next": [
+      "AlasResearchClaim",
+      "AlasResearchClose"
+    ]
+  },
+  "AlasResearchClose": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 800,
+    "next": [
+      "AlasMainScreen"
+    ]
+  },
+  "AlasDorm_Task": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 30000,
+    "next": [
+      "AlasDormWaitMain"
+    ]
+  },
+  "AlasDormWaitMain": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "出击"
+        ],
+        "roi": [
+          0,
+          360,
+          1280,
+          360
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": "DoNothing",
+    "next": [
+      "AlasDormOpen"
+    ]
+  },
+  "AlasDormOpen": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "后宅"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 1500,
+    "next": [
+      "AlasDormCollect"
+    ]
+  },
+  "AlasDormCollect": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "领取"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 900,
+    "next": [
+      "AlasDormCollect",
+      "AlasDormClose"
+    ]
+  },
+  "AlasDormClose": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 800,
+    "next": [
+      "AlasMainScreen"
+    ]
+  },
+  "AlasShop_Task": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 30000,
+    "next": [
+      "AlasShopWaitMain"
+    ]
+  },
+  "AlasShopWaitMain": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "出击"
+        ],
+        "roi": [
+          0,
+          360,
+          1280,
+          360
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": "DoNothing",
+    "next": [
+      "AlasShopOpen"
+    ]
+  },
+  "AlasShopOpen": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "补给"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 1500,
+    "next": [
+      "AlasShopFree"
+    ]
+  },
+  "AlasShopFree": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "免费",
+          "领取"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 900,
+    "next": [
+      "AlasShopFree",
+      "AlasShopClose"
+    ]
+  },
+  "AlasShopClose": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "post_delay": 800,
+    "next": [
+      "AlasMainScreen"
+    ]
+  },
+  "AlasRoutine_Task": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 30000,
+    "next": [
+      "AlasSignInWaitMain"
+    ]
+  }
+}

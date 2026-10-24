@@ -1,11 +1,72 @@
 {
   "AlasStartGame": {
-    "action": "StartApp",
-    "package": "com.bilibili.azurlane",
-    "timeout": 15000
+    "recognition": "DirectHit",
+    "action": {
+      "type": "StartApp",
+      "param": {
+        "package": "com.bilibili.azurlane"
+      }
+    },
+    "timeout": 90000,
+    "post_delay": 3000,
+    "next": [
+      "AlasMainScreen",
+      "AlasTapToContinue",
+      "AlasAnnouncementClose"
+    ],
+    "on_error": [
+      "AlasStartFailed"
+    ]
   },
-  "AlasResourceLoaded": {
-    "action": "DoNothing",
+  "AlasTapToContinue": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "点击屏幕",
+          "开始游戏",
+          "触摸屏幕"
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 1500,
+    "next": [
+      "AlasMainScreen",
+      "AlasAnnouncementClose"
+    ]
+  },
+  "AlasAnnouncementClose": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "关闭"
+        ],
+        "threshold": 0.35
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "post_delay": 800,
+    "next": [
+      "AlasMainScreen",
+      "AlasTapToContinue"
+    ]
+  },
+  "AlasStartFailed": {
+    "recognition": "DirectHit",
+    "action": "StopTask",
     "timeout": 1000
   }
 }

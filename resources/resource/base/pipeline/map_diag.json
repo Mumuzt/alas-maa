@@ -1,0 +1,7 @@
+{
+  "AlasResourceLoaded": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 1000
+  }
+}

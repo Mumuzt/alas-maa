@@ -1,24 +1,26 @@
 {
   "interface_version": 2,
-  "name": "alas-maa",
+  "name": "alasmaa",
   "label": "Alas Maa",
-  "title": "Alas Maa 0.1.0",
-  "version": "0.1.0",
-  "description": "将 Alas 的碧蓝航线自动化能力接入 MaaFramework 的 Android 宿主。",
+  "title": "Alas Maa 碧蓝航线",
+  "version": "0.2.0",
+  "description": "把碧蓝航线的日常自动化接进 MaaFramework 的 Android 宿主（MaaFwApp）。所有流程由 Pipeline + OCR 文本锚点驱动，不依赖固定像素坐标，方便按服务器与 UI 版本微调。",
   "contact": "https://github.com/Justccerly/alas-maa",
   "license": "GPL-3.0-or-later",
   "github": "https://github.com/Justccerly/alas-maa",
+  "welcome": "首次使用请确认：游戏已安装并登录、宿主已连上 Shizuku 或 Root、后台模式建议选 720P。\n\n当前日常流程为 MVP 骨架，进入游戏后的具体点击顺序需按你的服务器版本标定。",
   "controller": [
     {
       "name": "Android",
-      "label": "Android ADB",
-      "type": "Adb"
+      "label": "Android（Shizuku / Root）",
+      "type": "Adb",
+      "display_short_side": 720
     }
   ],
   "resource": [
     {
       "name": "Default",
-      "label": "默认资源",
+      "label": "碧蓝航线通用",
       "path": [
         "resource/base"
       ],
@@ -29,25 +31,32 @@
   ],
   "group": [
     {
+      "name": "daily",
+      "label": "日常"
+    },
+    {
       "name": "diagnostic",
       "label": "诊断"
     }
-  ],
-  "import": [
-    "tasks/startup.json"
   ],
   "option": {
     "游戏服务器": {
       "type": "select",
       "label": "游戏服务器",
-      "description": "选择需要通过 ADB 启动的碧蓝航线客户端包名。",
+      "description": "决定启动哪个客户端包名。客户端必须已安装。",
+      "default_case": "CN",
       "cases": [
         {
           "name": "CN",
           "label": "国服 B 服",
           "pipeline_override": {
             "AlasStartGame": {
-              "package": "com.bilibili.azurlane"
+              "action": {
+                "type": "StartApp",
+                "param": {
+                  "package": "com.bilibili.azurlane"
+                }
+              }
             }
           }
         },
@@ -56,7 +65,12 @@
           "label": "国际服 EN",
           "pipeline_override": {
             "AlasStartGame": {
-              "package": "com.YoStarEN.AzurLane"
+              "action": {
+                "type": "StartApp",
+                "param": {
+                  "package": "com.YoStarEN.AzurLane"
+                }
+              }
             }
           }
         },
@@ -65,7 +79,12 @@
           "label": "日服 JP",
           "pipeline_override": {
             "AlasStartGame": {
-              "package": "com.YoStarJP.AzurLane"
+              "action": {
+                "type": "StartApp",
+                "param": {
+                  "package": "com.YoStarJP.AzurLane"
+                }
+              }
             }
           }
         },
@@ -74,11 +93,95 @@
           "label": "港澳台服",
           "pipeline_override": {
             "AlasStartGame": {
-              "package": "com.hkmanjuu.azurlane.gp"
+              "action": {
+                "type": "StartApp",
+                "param": {
+                  "package": "com.hkmanjuu.azurlane.gp"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "委托领取方式": {
+      "type": "select",
+      "label": "委托领取方式",
+      "description": "不同 UI 版本委托页的领取按钮文案不一样，按你看到的选。",
+      "default_case": "一键",
+      "cases": [
+        {
+          "name": "一键",
+          "label": "一键领取（优先）",
+          "pipeline_override": {
+            "AlasCommissionClaim": {
+              "recognition": {
+                "type": "OCR",
+                "param": {
+                  "expected": [
+                    "一键领取",
+                    "全部领取"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "逐个",
+          "label": "逐个领取",
+          "pipeline_override": {
+            "AlasCommissionClaim": {
+              "recognition": {
+                "type": "OCR",
+                "param": {
+                  "expected": [
+                    "领取"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "回主界面方式": {
+      "type": "select",
+      "label": "回主界面方式",
+      "description": "用返回键退回港口；个别机型返回键会触发退出确认弹窗，此时选“返回并清弹窗”。",
+      "default_case": "返回键",
+      "cases": [
+        {
+          "name": "返回键",
+          "label": "只按返回键",
+          "pipeline_override": {
+            "AlasBackToMain": {
+              "next": [
+                "AlasMainScreen",
+                "AlasBackToMain2"
+              ]
+            }
+          }
+        },
+        {
+          "name": "返回并清弹窗",
+          "label": "返回键 + 关退出弹窗",
+          "pipeline_override": {
+            "AlasBackToMain": {
+              "next": [
+                "AlasMainScreen",
+                "AlasExitDialog",
+                "AlasBackToMain2"
+              ]
             }
           }
         }
       ]
     }
-  }
+  },
+  "import": [
+    "tasks/startup.json",
+    "tasks/daily.json",
+    "tasks/map_diag.json"
+  ]
 }

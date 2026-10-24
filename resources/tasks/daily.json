@@ -1,0 +1,92 @@
+{
+  "task": [
+    {
+      "name": "每日签到",
+      "label": "每日签到",
+      "entry": "AlasSignIn_Task",
+      "group": [
+        "daily"
+      ],
+      "description": "进入「任务」面板领取每日任务奖励。等待港口主界面（识别「出击」）后开始。"
+    },
+    {
+      "name": "委托",
+      "label": "委托",
+      "entry": "AlasCommission_Task",
+      "group": [
+        "daily"
+      ],
+      "option": [
+        "委托领取方式"
+      ],
+      "description": "进入「任务 → 委托」领取已完成的委托奖励。"
+    },
+    {
+      "name": "科研",
+      "label": "科研",
+      "entry": "AlasResearch_Task",
+      "group": [
+        "daily"
+      ],
+      "description": "进入「科研」页领取研究项目奖励。"
+    },
+    {
+      "name": "后宅",
+      "label": "后宅",
+      "entry": "AlasDorm_Task",
+      "group": [
+        "daily"
+      ],
+      "description": "进入「后宅」领取宿舍产出（食物、金币）。"
+    },
+    {
+      "name": "商店补给",
+      "label": "商店补给",
+      "entry": "AlasShop_Task",
+      "group": [
+        "daily"
+      ],
+      "description": "进入「补给」商店领取免费补给。"
+    },
+    {
+      "name": "一键日常",
+      "label": "一键日常",
+      "entry": "AlasRoutine_Task",
+      "group": [
+        "daily"
+      ],
+      "default_check": true,
+      "option": [
+        "委托领取方式"
+      ],
+      "description": "依次执行：签到 → 委托 → 科研 → 后宅 → 商店补给。各步骤之间不重复回主界面，失败会停在出错的步骤。",
+      "pipeline_override": {
+        "AlasSignInClose": {
+          "next": [
+            "AlasCommissionOpen"
+          ]
+        },
+        "AlasCommissionClose": {
+          "next": [
+            "AlasResearchOpen"
+          ]
+        },
+        "AlasResearchClose": {
+          "next": [
+            "AlasDormOpen"
+          ]
+        },
+        "AlasDormClose": {
+          "next": [
+            "AlasShopOpen"
+          ]
+        },
+        "AlasShopClose": {
+          "next": [
+            "AlasMainScreen"
+          ]
+        }
+      }
+    }
+  ]
+}

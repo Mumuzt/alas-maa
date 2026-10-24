@@ -11,37 +11,28 @@
       "option": [
         "游戏服务器"
       ],
-      "description": "通过 Android ADB 控制通道启动选定的碧蓝航线客户端。"
+      "description": "按 `游戏服务器` 启动对应包名的客户端，并等待进入港口主界面（识别到「出击」）。"
     },
     {
-      "name": "资源加载检查",
-      "label": "资源加载检查",
-      "entry": "AlasResourceLoaded",
+      "name": "回到主界面",
+      "label": "回到主界面",
+      "entry": "AlasEnsureMain",
       "group": [
         "diagnostic"
       ],
-      "default_check": false,
-      "description": "不依赖游戏画面，用于确认 Alas Maa 的 Project Interface、任务和 Pipeline 已被宿主加载。"
+      "option": [
+        "回主界面方式"
+      ],
+      "description": "从任意界面按返回键退回港口主界面，最多重试若干次。"
     },
     {
-      "name": "地图动作计划入口",
-      "label": "地图动作计划入口",
-      "entry": "AlasMapAction",
+      "name": "环境自检",
+      "label": "环境自检",
+      "entry": "AlasPing",
       "group": [
         "diagnostic"
       ],
-      "default_check": false,
-      "description": "动作计划回放入口。宿主通过 Pipeline override 注入固定坐标 Click 节点。"
-    },
-    {
-      "name": "地图识别回放",
-      "label": "地图识别回放",
-      "entry": "AlasMapRecognition",
-      "group": [
-        "diagnostic"
-      ],
-      "default_check": false,
-      "description": "通过 v5.10.5 Custom Recognition 回调回放固定地图识别结果，验证 out_box/out_detail 桥接。"
+      "description": "不依赖游戏画面，只验证资源包、任务与 Pipeline 已被宿主加载。"
     }
   ]
 }

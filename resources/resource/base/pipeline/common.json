@@ -1,0 +1,119 @@
+{
+  "AlasPing": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 1000
+  },
+  "AlasMainScreen": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "出击"
+        ],
+        "roi": [
+          0,
+          360,
+          1280,
+          360
+        ],
+        "threshold": 0.3,
+        "order_by": "Area"
+      }
+    },
+    "action": "DoNothing",
+    "timeout": 1500,
+    "post_delay": 200
+  },
+  "AlasEnsureMain": {
+    "recognition": "DirectHit",
+    "action": "DoNothing",
+    "timeout": 2000,
+    "next": [
+      "AlasMainScreen"
+    ],
+    "on_error": [
+      "AlasBackToMain"
+    ]
+  },
+  "AlasBackToMain": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "pre_delay": 200,
+    "post_delay": 700,
+    "next": [
+      "AlasMainScreen",
+      "AlasBackToMain2"
+    ]
+  },
+  "AlasBackToMain2": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "pre_delay": 200,
+    "post_delay": 700,
+    "next": [
+      "AlasMainScreen",
+      "AlasBackToMain3"
+    ]
+  },
+  "AlasBackToMain3": {
+    "recognition": "DirectHit",
+    "action": {
+      "type": "ClickKey",
+      "param": {
+        "key": 4
+      }
+    },
+    "pre_delay": 200,
+    "post_delay": 700,
+    "next": [
+      "AlasMainScreen"
+    ]
+  },
+  "AlasExitDialog": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "确定退出",
+          "退出游戏"
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": "DoNothing",
+    "next": [
+      "AlasExitDialogCancel"
+    ]
+  },
+  "AlasExitDialogCancel": {
+    "recognition": {
+      "type": "OCR",
+      "param": {
+        "expected": [
+          "取消"
+        ],
+        "threshold": 0.3
+      }
+    },
+    "action": {
+      "type": "Click",
+      "param": {
+        "target": true
+      }
+    },
+    "next": [
+      "AlasMainScreen"
+    ]
+  }
+}
